@@ -16,7 +16,7 @@ public class ContactHelper extends HelperBase{
     }
 
     public void selectContact() {
-        click(By.id("4"));
+        click(By.id("5"));
     }
 
     public String closeAlertAndGetItsText() {
@@ -35,9 +35,11 @@ public class ContactHelper extends HelperBase{
     }
 
     public void deleteSelectedContact() {
-        acceptNextAlert = true;
+        /*acceptNextAlert = true;
         wd.findElement(By.xpath("//input[@value='Delete']")).click();
-        assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+        assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));*/
+        wd.findElement(By.xpath("//input[@value='Delete']")).click();
+        wd.switchTo().alert().accept();
     }
 
     public void fillContactForm(ContactData groupData) {
