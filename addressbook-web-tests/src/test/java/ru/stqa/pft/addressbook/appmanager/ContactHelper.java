@@ -1,43 +1,22 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import static org.testng.Assert.assertTrue;
 
 public class ContactHelper extends HelperBase{
 
-    public boolean acceptNextAlert = true;
 
     public ContactHelper(WebDriver wd) {
         super(wd);
     }
 
     public void selectContact() {
-        click(By.id("5"));
-    }
-
-    public String closeAlertAndGetItsText() {
-        try {
-            Alert alert = wd.switchTo().alert();
-            String alertText = alert.getText();
-            if (acceptNextAlert) {
-                alert.accept();
-            } else {
-                alert.dismiss();
-            }
-            return alertText;
-        } finally {
-            acceptNextAlert = true;
-        }
+        click(By.id("8"));
     }
 
     public void deleteSelectedContact() {
-        /*acceptNextAlert = true;
-        wd.findElement(By.xpath("//input[@value='Delete']")).click();
-        assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));*/
         wd.findElement(By.xpath("//input[@value='Delete']")).click();
         wd.switchTo().alert().accept();
     }
@@ -51,7 +30,6 @@ public class ContactHelper extends HelperBase{
     }
 
     public void submitContactCreation() {
-        //click(By.xpath("(//input[@name='submit'])[2]")).click();
         click(By.name("submit"));
     }
 
@@ -59,4 +37,11 @@ public class ContactHelper extends HelperBase{
         click(By.linkText("home"));
     }
 
+    public void modifyContact() {
+        click(By.xpath("//img[@alt='Edit']"));
+    }
+
+    public void submitContactModification() {
+        click(By.name("update"));
+    }
 }
