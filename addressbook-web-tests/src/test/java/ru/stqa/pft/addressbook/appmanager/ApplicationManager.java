@@ -1,23 +1,36 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.BrowserType;
 
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertTrue;
 
 public class ApplicationManager {
+    private final String browser;
     public WebDriver wd;
-    public boolean acceptNextAlert = true;
 
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
     private ContactHelper contactHelper;
 
+    public ApplicationManager (String browser) {
+        this.browser = browser;
+    }
+
     public void init() {
-        wd = new FirefoxDriver();
+        if (browser == BrowserType.FIREFOX) {
+            wd = new FirefoxDriver();
+        } else if (browser == BrowserType.CHROME) {
+            wd = new ChromeDriver();
+        } else if (browser == BrowserType.IE) {
+            wd = new InternetExplorerDriver();
+        }
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
@@ -38,30 +51,6 @@ public class ApplicationManager {
       } catch (NoSuchElementException e) {
         return false;
       }
-    }
-
-    private boolean isAlertPresent() {
-        try {
-            wd.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
-    }
-
-    private String closeAlertAndGetItsText() {
-        try {
-            Alert alert = wd.switchTo().alert();
-            String alertText = alert.getText();
-            if (acceptNextAlert) {
-                alert.accept();
-            } else {
-                alert.dismiss();
-            }
-            return alertText;
-        } finally {
-            acceptNextAlert = true;
-        }
     }
 
     public GroupHelper getGroupHelper() {
