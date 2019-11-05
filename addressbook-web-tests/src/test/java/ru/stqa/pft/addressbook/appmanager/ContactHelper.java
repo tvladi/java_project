@@ -15,7 +15,7 @@ public class ContactHelper extends HelperBase{
     }
 
     public void selectContact() {
-        click(By.id("8"));
+        click(By.id("18"));
     }
 
     public void deleteSelectedContact() {
@@ -51,5 +51,15 @@ public class ContactHelper extends HelperBase{
 
     public void submitContactModification() {
         click(By.name("update"));
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    public void createContact(ContactData contact, boolean ifCreation) {
+        fillContactForm(contact, ifCreation);
+        submitContactCreation();
+        returntoHomePage();
     }
 }
