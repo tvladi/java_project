@@ -1,0 +1,49 @@
+package ru.stqa.pft.sandbox;
+
+public class Prime {
+    public static boolean isPrimeFor(int n) {
+        for (int i = 2; i < n; i ++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isPrimeWhile(int n) {
+        int i = 2;
+        while ((i < n) && (n % i != 0)) {
+            i++;
+        }
+        return i == n;
+    }
+
+    public static boolean isPrimeFor(long n) {
+        for (int i = 2; i < n; i ++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isPrimeFast(int n) {
+        for (int i = 2; i < n / 2; i ++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isPrimeSqrt(int n) {
+        int m = (int) Math.sqrt(m);
+        for (int i = 2; i < m; i ++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+}
